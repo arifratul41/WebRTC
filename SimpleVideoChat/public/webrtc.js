@@ -53,7 +53,8 @@ function initiateCall() {
   // get the local stream, show it in the local video element and send it
   navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
     localVideoStream = stream;
-    localVideo.src = URL.createObjectURL(localVideoStream);
+  //  localVideo.src = URL.createObjectURL(localVideoStream);
+    localVideo.srcObject = localVideoStream;
     peerConn.addStream(localVideoStream);
     createAndSendOffer();
   }, function(error) { console.log(error);});
@@ -64,7 +65,8 @@ function answerCall() {
   // get the local stream, show it in the local video element and send it
   navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
     localVideoStream = stream;
-    localVideo.src = URL.createObjectURL(localVideoStream);
+  // localVideo.src = URL.createObjectURL(localVideoStream);
+    localVideo.srcObject = localVideoStream;
     peerConn.addStream(localVideoStream);
     createAndSendAnswer();
   }, function(error) { console.log(error);});
@@ -125,7 +127,8 @@ function onAddStreamHandler(evt) {
   videoCallButton.setAttribute("disabled", true);
   endCallButton.removeAttribute("disabled"); 
   // set remote video stream as source for remote video HTML5 element
-  remoteVideo.src = URL.createObjectURL(evt.stream);
+  // remoteVideo.src = URL.createObjectURL(evt.stream);
+  remoteVideo.srcObject = evt.stream;
 };
 
 function endCall() {
